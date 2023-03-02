@@ -27,7 +27,6 @@ const countMine = (startX, startY, arr) => {
 
     for(let x = -1; x < 2; x++){
         for(let y = -1; y < 2; y++){
-            debugger
             if((startX + x >= 0 && startX + x < 16) && (startY + y >= 0 && startY + y < 16) ){//проверка координат
                 count = count + isMine(startX + x, startY + y, arr);
             }
@@ -37,10 +36,12 @@ const countMine = (startX, startY, arr) => {
     return count;
 }
 
-const openCell = (id, arr) => {
+const openCell = (id, arr, handlerLoss, handlerIdLoss) => {
     let [xEl, yEl] = fromIdToXYDirection(id);
 
     if(isMine(xEl, yEl, arr) === 1){//проверка на нажатие на мину
+        handlerLoss(true); //игрок нажал на мину
+        handlerIdLoss(id);
         return; 
     } 
 

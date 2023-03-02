@@ -1,4 +1,4 @@
-const generateMines = () => {
+const generateMines = (idStart) => {
     let result = [];
     let countOne = 0;
     let k = 0;//число для псевдо ровного распределения
@@ -7,7 +7,10 @@ const generateMines = () => {
     for(let i = 0; i < 256; i++){
 
         if(countOne < 40 && i > k){
-            let lastElem = getRandomNumber(2);
+            let lastElem = getRandomNumber(2); //генерирует мину у i элемента
+            if(i === idStart){
+                lastElem = 0; //указываем что на месте первого нажатия нету мины
+            }
             result.push(lastElem);
             if(lastElem === 1){
                 countOne++;
