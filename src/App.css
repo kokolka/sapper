@@ -4,3 +4,26 @@ td{
     border: 1px solid black;
 }
 
+.standard{
+    background-color: white;
+}
+
+.question{
+    background-color: green;
+}
+
+.flag{
+    background-color: blue;
+}
+
+.clear{
+    background-color: gray;
+}
+
+.loos{
+    background-color: red;
+}
+
+.mine{
+    background-color: rgb(0, 0, 0);
+}
