@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import generateMines from './scripts/generateMines';
+import openCell from './scripts/openCell';
 
-const genLineForField = (idStart) => {
+let arrMine = generateMines();
+
+const genLineForField = (idStart, handler) => {
     let result = [];
 
     for(let i = 0; i < 16; i++){
@@ -11,13 +15,16 @@ const genLineForField = (idStart) => {
     return result.map(el => {
         return(
             // элемент поля
-            <td id={el} key={`td${el}`}>
-                <img src="" alt={`img${el}`}/>
+            <td id={`t${el}`} key={`td${el}`} onClick={() => {
+                handler(el);
+            }}>
+                {/* <img src="" alt={`img${el}`}/> */}
+                {arrMine[el]==1?'@':' '}
             </td>
         )
     })
 }
-const genMineField = () => {
+const genMineField = (handler) => {
     let result = [];
 
     for(let i = 0; i < 16; i++){
@@ -27,14 +34,32 @@ const genMineField = () => {
     return result.map(el => {
         return(
             <tr key={`tr${el}`}>
-                {genLineForField(el * 16)}
+                {genLineForField(el * 16, handler)}
             </tr>
         )
     })
 }
 
 const Field = (props) => {
-    let field = genMineField(); //создание поля
+    let s = {};
+
+    const clearArea = (id) => {
+        s = openCell(id, arrMine);
+        changeElem();
+    }
+
+    const changeElem = () => { //функция для перерисовки элементов
+        for(let key in s){
+            let id = `#t${key}`;
+            let elem = document.querySelector(id);
+            // console.log(elem);
+            elem.innerHTML = s[key];
+        }
+    }
+    
+    let field = genMineField(clearArea); //создание поля
+
+
 
     return(
         <div>

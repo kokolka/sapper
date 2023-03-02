@@ -8,9 +8,9 @@ const resetLevelHandler = (fun, timer) => {
 const Header = (props) => {
     let [timer, setTimer] = useState(0);
 
-    let t = setInterval(() => {
-        setTimer(timer + 1);
-    }, 1000);
+    // let t = setInterval(() => {
+    //     setTimer(timer + 1);
+    // }, 1000);
 
     useEffect(() => {}, [timer]);
 
@@ -27,7 +27,7 @@ const Header = (props) => {
 
             {/* Кнопка reset */}
             <div onClick={() => {
-                resetLevelHandler(props.resetLevel, t);
+                // resetLevelHandler(props.resetLevel, t);
             }}>
                 <img src="" alt="reset" />
             </div>
