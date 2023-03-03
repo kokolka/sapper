@@ -78,7 +78,7 @@ const Header = (props) => {
 
             {/* Кнопка reset */}
             <div id='resetButton' className='normal-smile' onClick={() => {
-                props.rerender();
+                window.location.reload();
             }}>
             </div>
 

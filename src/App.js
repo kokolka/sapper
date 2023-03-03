@@ -15,7 +15,7 @@ function App(props) {
   return (
     <div className="App">
       <Header 
-        mineCount={globalCounterMines} isLoss={isLoss} rerender={props.rerender}
+        mineCount={globalCounterMines} isLoss={isLoss}
         setIsLoss={setIsLoss} isWin={isWin} globalCounterMines={globalCounterMines}
       />
       <Field 
