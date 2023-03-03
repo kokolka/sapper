@@ -12,7 +12,7 @@ const Header = (props) => {
 
     useEffect(() => {
         if(props.isLoss === false){
-            if(timer > 0){
+            if(timer > 0 && timer < 999){
                 clearTimeout(t);
                 genTimer();
             }else if(timer === 0){
@@ -26,23 +26,67 @@ const Header = (props) => {
         }        
     }, [timer, props.isLoss]);
 
+    useEffect(() => {
+        if(props.isWin === true){
+            let buttonReset = document.querySelector('#resetButton');
+            buttonReset.className = 'win-smile';
+        }
+        
+    }, [props.isWin])
+
+    useEffect(() => {
+        let countToString = props.globalCounterMines.toString();
+        let counter0 = document.querySelector('#counter0');
+        let counter1 = document.querySelector('#counter1');
+        if(countToString.length === 1){
+            counter0.className = 'number-0';
+            counter1.className = `number-${countToString[0]}`;
+        }else{
+            counter0.className = `number-${countToString[0]}`;
+            counter1.className = `number-${countToString[1]}`;
+        }
+        
+    }, [props.globalCounterMines])
+
+    useEffect(() => {
+        let timerToString = timer.toString();
+        let timer0 = document.querySelector('#timer0');
+        let timer1 = document.querySelector('#timer1');
+        let timer2 = document.querySelector('#timer2');
+        if(timerToString.length === 1){
+            timer0.className = 'number-0';
+            timer1.className = 'number-0';
+            timer2.className = `number-${timerToString[0]}`;
+        }else if(timerToString.length === 2){
+            timer0.className = 'number-0';
+            timer1.className = `number-${timerToString[0]}`;
+            timer2.className = `number-${timerToString[1]}`;
+        }else{
+            timer0.className = `number-${timerToString[0]}`;
+            timer1.className = `number-${timerToString[1]}`;
+            timer2.className = `number-${timerToString[2]}`;
+        }
+    }, [timer])
+
     return(
         <div className='header-box'>
             {/* количество мин */}
-            <div>
-                {props.mineCount}
+            <div className='header-counter'>
+                <div id='counter0'></div>
+                <div id='counter1'></div>
             </div>
 
             {/* Кнопка reset */}
-            <div onClick={() => {
-                window.location.reload();
+            <div id='resetButton' className='normal-smile' onClick={() => {
+                props.rerender();
             }}>
-                reset
             </div>
 
             {/* таймер */}
-            <div>
-                {timer}
+            <div className='header-timer'>
+                <div id='timer0'></div>
+                <div id='timer1'></div>
+                <div id='timer2'></div>
             </div>
         </div>
     )

@@ -27,7 +27,6 @@ const generateMines = (idStart) => {
         }
     }
     
-    console.log(countOne);
     return result;
 }
 

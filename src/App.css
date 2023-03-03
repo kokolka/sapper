@@ -1,13 +1,40 @@
 .App{
     display: flex;
     flex-direction: column;
-
 }
 
 .header-box{
     display: grid;
     grid-template-columns : 100px 100px 100px;
 }
+.header-timer, .header-counter{
+    display: flex;
+}
+#counter0, #counter1, #timer0, #timer1, #timer2{
+    height: 23px;
+    width: 13px;
+}
+#resetButton{
+    width: 26px;
+    height: 26px;
+}
+.normal-smile{
+    background-image: url(../src/commons/props/normal-smile.jpg);
+    background-repeat: no-repeat;
+}
+.normal-smile:active{
+    background-image: url(../src/commons/props/action-normal-smile.jpg);
+    background-repeat: no-repeat;
+}
+.o-smile{
+    background-image: url(../src/commons/props/O-smile.jpg);
+    background-repeat: no-repeat;
+}
+.win-smile{
+    background-image: url(../src/commons/props/best-smile.jpg);
+    background-repeat: no-repeat;
+}
+
 
 .field-box{
     display: inline-block;
@@ -24,8 +51,6 @@ tr{
 td{
     padding: 0;
     margin: 0;
-    /* width: 30px;
-    height: 30px; */
     width: 16px;
     height: 16px;
 }
@@ -90,5 +115,46 @@ td{
 }
 .mine-8{
     background-image: url(../src/commons/props/mine-8.jpg);
+    background-repeat: no-repeat;
+}
+
+.number-0{
+    background-image: url(../src/commons/props/img-0.jpg);
+    background-repeat: no-repeat;
+}
+.number-1{
+    background-image: url(../src/commons/props/img-1.jpg);
+    background-repeat: no-repeat;
+}
+.number-2{
+    background-image: url(../src/commons/props/img-2.jpg);
+    background-repeat: no-repeat;
+}
+.number-3{
+    background-image: url(../src/commons/props/img-3.jpg);
+    background-repeat: no-repeat;
+}
+.number-4{
+    background-image: url(../src/commons/props/img-4.jpg);
+    background-repeat: no-repeat;
+}
+.number-5{
+    background-image: url(../src/commons/props/img-5.jpg);
+    background-repeat: no-repeat;
+}
+.number-6{
+    background-image: url(../src/commons/props/img-6.jpg);
+    background-repeat: no-repeat;
+}
+.number-7{
+    background-image: url(../src/commons/props/img-7.jpg);
+    background-repeat: no-repeat;
+}
+.number-8{
+    background-image: url(../src/commons/props/img-8.jpg);
+    background-repeat: no-repeat;
+}
+.number-9{
+    background-image: url(../src/commons/props/img-9.jpg);
     background-repeat: no-repeat;
 }
