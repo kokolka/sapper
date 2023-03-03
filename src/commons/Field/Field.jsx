@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import generateMines from './scripts/generateMines';
-import openCell from './scripts/openCell';
+import generateMines from '../scripts/generateMines';
+import openCell from '../scripts/openCell';
 
 let arrMines = []; //массив для генерируемых мин
 
-const genLineForField = (idStart, handler, isLoss, handlerFP) => {
+
+const genLineForField = (idStart, handler, isLoss, handlerFP, changeCounterMine) => {
     let result = [];
 
     for (let i = 0; i < 16; i++) {
@@ -18,30 +19,30 @@ const genLineForField = (idStart, handler, isLoss, handlerFP) => {
             <td id={`t${el}`} key={`td${el}`} className='standard'
                 onClick={(e) => {
                     if (!isLoss) {
-                        if(e.target.className === 'standard'){
+                        if (e.target.className === 'standard') {
                             handlerFP(el);
                             handler(el);
-                            e.target.className = 'clear';
-                        }                        
-                    } 
+                        }
+                    }
                 }}
                 onContextMenu={(e) => {
-                    if(e.target.className === 'standard'){
+                    if (e.target.className === 'standard') {
                         e.target.className = 'flag';//установка флага
-                    }else if(e.target.className === 'flag'){
+                        changeCounterMine(-1);
+                    } else if (e.target.className === 'flag') {
                         e.target.className = 'question';//установка вопроса
-                    }else if(e.target.className === 'question'){
+                        changeCounterMine(+1);
+                    } else if (e.target.className === 'question') {
                         e.target.className = 'standard';//возврат назад
                     }
                     e.preventDefault();//отключение контекстного меню
                 }}
             >
-                {' '}
             </td>
         )
     })
 }
-const genMineField = (handler, isLoss, handlerFP) => {
+const genMineField = (handler, isLoss, handlerFP, changeCounterMine) => {
     let result = [];
 
     for (let i = 0; i < 16; i++) {
@@ -51,7 +52,7 @@ const genMineField = (handler, isLoss, handlerFP) => {
     return result.map(el => {
         return (
             <tr key={`tr${el}`}>
-                {genLineForField(el * 16, handler, isLoss, handlerFP)}
+                {genLineForField(el * 16, handler, isLoss, handlerFP, changeCounterMine)}
             </tr>
         )
     })
@@ -59,30 +60,28 @@ const genMineField = (handler, isLoss, handlerFP) => {
 
 const Field = (props) => {
     let s = {};
-    let [isLoss, setIsLoss] = useState(false);
     let [lossCell, setLossCell] = useState(null); //id мины на которую нажал игрок
     let idFirstPress; //хранит id элемента, на окторый было совершено первое нажатие
     //полсе первого нажатия сгенерируем поле с минами    
 
     useEffect(() => {
-        if (isLoss) { //если проигрышь
+        if (props.isLoss) { //если проигрышь
             let lossId = `#t${lossCell}`;
             let lossElem = document.querySelector(lossId);
             lossElem.className = 'loos';
-            lossElem.innerHTML = 'X'; //изменить отображение элемента с взорванной миной
 
-            for (let key in arrMines){
-                if(arrMines[key] === 1 && key != lossCell){
+            for (let key in arrMines) {
+                if (arrMines[key] === 1 && key != lossCell) {
                     let mineId = `#t${key}`;
                     let lossMine = document.querySelector(mineId);
                     lossMine.className = 'mine';
                 }
             }
         }
-    }, lossCell)
+    }, [lossCell, props.isLoss])
 
     const clearArea = (id) => {
-        s = {...s, ...openCell(id, arrMines, setIsLoss, setLossCell)};//определение какие ячейки открыт
+        s = { ...s, ...openCell(id, arrMines, props.setIsLoss, setLossCell) };//определение какие ячейки открыт
         changeElem();
     }
 
@@ -90,31 +89,31 @@ const Field = (props) => {
         for (let key in s) {
             let id = `#t${key}`; //id изменяемого элемента
             let elem = document.querySelector(id);
-            elem.className = 'clear';
-            elem.innerHTML = s[key] > 0? s[key]: s[key];
+            if (s[key] > 0) {
+                let classNameMines = `mine-${s[key]}`;
+                elem.className = classNameMines;
+            } else {
+                elem.className = 'clear';
+            }
         }
     }
 
     const handlerFirsPress = (id) => {
-        if(idFirstPress == undefined){
+        if (idFirstPress == undefined) {
             idFirstPress = id;
-            s = {[id]: 0};
+            s = { [id]: 0 };
 
-            generateMinesField();
+            arrMines = generateMines(idFirstPress);//генерирование мин после нажатия
         }
     }
 
-    const generateMinesField = () => { //генерирование мин после нажатия
-        arrMines = generateMines(idFirstPress);
-    }
-
-    let field = genMineField(clearArea, isLoss, handlerFirsPress); //создание поля с минами
+    let field = genMineField(clearArea, props.isLoss, handlerFirsPress, props.changeCounterMine); //создание поля с минами
 
     return (
-        <div>
+        <div className='field-box'>
             <table onContextMenu={(e) => {
-                    e.preventDefault();//отключение контекстного меню
-                }}>
+                e.preventDefault();//отключение контекстного меню
+            }} >
                 {field}
             </table>
         </div>

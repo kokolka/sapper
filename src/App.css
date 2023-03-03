@@ -1,29 +1,94 @@
+.App{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.header-box{
+    display: grid;
+    grid-template-columns : 100px 100px 100px;
+}
+
+.field-box{
+    display: inline-block;
+}
+table{
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+}
+tr{
+    padding: 0;
+    margin: 0;
+}
 td{
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
+    padding: 0;
+    margin: 0;
+    /* width: 30px;
+    height: 30px; */
+    width: 16px;
+    height: 16px;
 }
 
 .standard{
-    background-color: white;
+    background-image: url(../src/commons/props/common-pad.jpg);
+    background-repeat: no-repeat;
 }
 
 .question{
-    background-color: green;
+    background-image: url(../src/commons/props/question-pad.jpg);
+    background-repeat: no-repeat;
 }
 
 .flag{
-    background-color: blue;
+    background-image: url(../src/commons/props/flag-pad.jpg);
+    background-repeat: no-repeat;
 }
 
 .clear{
-    background-color: gray;
+    background-image: url(../src/commons/props/action-common-pad.jpg);
+    background-repeat: no-repeat;
 }
 
 .loos{
-    background-color: red;
+    background-image: url(../src/commons/props/boom-mine.jpg);
+    background-repeat: no-repeat;
 }
 
 .mine{
-    background-color: rgb(0, 0, 0);
+    background-image: url(../src/commons/props/action-mine.jpg);
+    background-repeat: no-repeat;
+}
+
+.mine-1{
+    background-image: url(../src/commons/props/mine-1.jpg);
+    background-repeat: no-repeat;
+}
+.mine-2{
+    background-image: url(../src/commons/props/mine-2.jpg);
+    background-repeat: no-repeat;
+}
+.mine-3{
+    background-image: url(../src/commons/props/mine-3.jpg);
+    background-repeat: no-repeat;
+}
+.mine-4{
+    background-image: url(../src/commons/props/mine-4.jpg);
+    background-repeat: no-repeat;
+}
+.mine-5{
+    background-image: url(../src/commons/props/mine-5.jpg);
+    background-repeat: no-repeat;
+}
+.mine-6{
+    background-image: url(../src/commons/props/mine-6.jpg);
+    background-repeat: no-repeat;
+}
+.mine-7{
+    background-image: url(../src/commons/props/mine-7.jpg);
+    background-repeat: no-repeat;
+}
+.mine-8{
+    background-image: url(../src/commons/props/mine-8.jpg);
+    background-repeat: no-repeat;
 }
