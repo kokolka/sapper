@@ -3,7 +3,9 @@ import generateMines from '../scripts/generateMines';
 import openCell from '../scripts/openCell';
 
 let arrMines = []; //массив для генерируемых мин
-
+let idFirstPress; //хранит id элемента, на окторый было совершено первое нажатие
+//полсе первого нажатия сгенерируем поле с минами 
+let s = {}; //хранит открытые ячейки  
 
 const genLineForField = (idStart, handler, isLoss, handlerFP, setGlobalCounterMines, globalCounterMines, isWin) => {
     let result = [];
@@ -26,7 +28,7 @@ const genLineForField = (idStart, handler, isLoss, handlerFP, setGlobalCounterMi
                     }
                 }}
                 onContextMenu={(e) => {
-                    if(isWin === false){ //когда инрок выйграет события станут недоступны
+                    if(!isLoss && !isWin){ //когда инрок выйграет события станут недоступны
                         if (e.target.className === 'standard' && globalCounterMines > 0) {
                             e.target.className = 'flag';//установка флага
                             setGlobalCounterMines(globalCounterMines-1);
@@ -40,13 +42,13 @@ const genLineForField = (idStart, handler, isLoss, handlerFP, setGlobalCounterMi
                     e.preventDefault();//отключение контекстного меню
                 }}
                 onMouseDown={() => {
-                    if(isWin === false){
+                    if(!isLoss && !isWin){
                         let resetButton = document.querySelector('#resetButton')
                         resetButton.className = 'o-smile';
                     }                    
                 }}
                 onMouseUp={() => {
-                    if(isWin === false){
+                    if(!isLoss && !isWin){
                         let resetButton = document.querySelector('#resetButton')
                         resetButton.className = 'normal-smile';
                     }                    
@@ -73,23 +75,30 @@ const genMineField = (handler, isLoss, handlerFP, setGlobalCounterMines, globalC
 }
 
 const Field = (props) => {
-    let s = {};
+    
     let [lossCell, setLossCell] = useState(null); //id мины на которую нажал игрок
     let [lengthS, setLengthS] = useState(0)
-    let idFirstPress; //хранит id элемента, на окторый было совершено первое нажатие
-    //полсе первого нажатия сгенерируем поле с минами    
+     
 
     useEffect(() => {
         if (props.isLoss) { //если проигрышь
             let lossId = `#t${lossCell}`;
             let lossElem = document.querySelector(lossId);
             lossElem.className = 'loos';
+            let resetButton = document.querySelector('#resetButton')
+            resetButton.className = 'dead-smile';
 
             for (let key in arrMines) {
                 if (arrMines[key] === 1 && key != lossCell) {
                     let mineId = `#t${key}`;
                     let lossMine = document.querySelector(mineId);
                     lossMine.className = 'mine';
+                }else if(arrMines[key] === 0 && key != lossCell){
+                    let padId = `#t${key}`;
+                    let padElem = document.querySelector(padId);
+                    if(padElem.className === 'flag'){
+                        padElem.className = 'fail-mine';
+                    }
                 }
             }
         }
