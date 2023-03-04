@@ -119,11 +119,12 @@ const Field = (props) => {
     }
 
     const changeElem = () => { //функция для перерисовки элементов
+        let mines = 0;
         for (let key in s) {
             let id = `#t${key}`; //id изменяемого элемента
             let elem = document.querySelector(id);
             if(elem.className === 'flag'){
-                props.setGlobalCounterMines(props.globalCounterMines + 1); //возвращаем счётчик флагов в изначальное состояние 
+                mines = mines + 1;
             }
             if (s[key] > 0) {
                 let classNameMines = `mine-${s[key]}`;
@@ -132,6 +133,7 @@ const Field = (props) => {
                 elem.className = 'clear';
             }
         }
+        props.setGlobalCounterMines(props.globalCounterMines + mines); //возвращаем счётчик флагов в изначальное состояние 
     }
 
     const handlerFirsPress = (id) => {
