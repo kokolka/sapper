@@ -122,6 +122,9 @@ const Field = (props) => {
         for (let key in s) {
             let id = `#t${key}`; //id изменяемого элемента
             let elem = document.querySelector(id);
+            if(elem.className === 'flag'){
+                props.setGlobalCounterMines(props.globalCounterMines + 1); //возвращаем счётчик флагов в изначальное состояние 
+            }
             if (s[key] > 0) {
                 let classNameMines = `mine-${s[key]}`;
                 elem.className = classNameMines;
