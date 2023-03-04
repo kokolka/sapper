@@ -1,11 +1,44 @@
+body{
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+}
 .App{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: 
+    "h"
+    "f";
+    row-gap: 8px;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+
+    padding: 8px;
+    background-color: #bdbdbd;
+    box-shadow: 5px 10px;
 }
 
 .header-box{
+    grid-area: h;
+    width: 100%;
+    height: 35px;
+
+    /* border: 1px solid black; */
+
     display: grid;
-    grid-template-columns : 100px 100px 100px;
+    grid-template-columns : 1fr 2fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+    box-shadow: -8px -8px 12px -5px rgba(255, 255, 255, 0.6) inset, 5px 5px 5px -1px rgba(0, 0, 0, 0.6) inset, -4px -5px 2px -4px rgba(0, 0, 0, 0.92);;
 }
 .header-timer, .header-counter{
     display: flex;
@@ -37,6 +70,9 @@
 
 
 .field-box{
+    grid-area: f;
+    border: 1px solid black;
+
     display: inline-block;
 }
 table{

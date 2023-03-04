@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './commons/Header/Header';
 import Field from './commons/Field/Field';
 
-function App(props) {
+function App() {
   let [globalCounterMines, setGlobalCounterMines] = useState(40);
   let [isLoss, setIsLoss] = useState(false);
   let [isWin, setIsWin] = useState(false);
