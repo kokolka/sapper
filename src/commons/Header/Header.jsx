@@ -30,6 +30,7 @@ const Header = (props) => {
         if(props.isWin === true){
             let buttonReset = document.querySelector('#resetButton');
             buttonReset.className = 'win-smile';
+            clearTimeout(t);
         }
         
     }, [props.isWin])
